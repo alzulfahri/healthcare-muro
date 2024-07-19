@@ -22,7 +22,7 @@ void setup() {
   Serial.begin(115200); // Start serial communication at 115200 baud rate
   Serial.println("Initializing...");
 
-  lcd.init();
+  lcd.begin();
   lcd.backlight();
   lcd.setCursor(0, 0);
   lcd.print("    WELCOME ");
@@ -34,6 +34,12 @@ void setup() {
   lcd.print("PSMURO");
   lcd.setCursor(0, 1);
   lcd.print("UNIV.GUNADARMA");
+  delay(5000);
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("MCU HEALTCARE");
+  lcd.setCursor(0, 1);
+  lcd.print("HEART RATE");
   delay(5000);
   lcd.clear();
 
@@ -82,8 +88,10 @@ void loop() {
   // Check if the sensor reading suggests that no finger is placed on the sensor
   if (irValue < 50000) {
     Serial.print(" No finger?");
+    lcd.setCursor(0, 0);
+    lcd.print("No Finger ?     ");
     lcd.setCursor(0, 1);
-    lcd.print("No Finger     ");
+    lcd.print("Letakan Jari! ");
   } else {
     lcd.clear();
     lcd.setCursor(0, 0);
@@ -95,5 +103,5 @@ void loop() {
   }
 
   Serial.println();
-  delay(500); // Delay to update the display and avoid flickering
+  //delay(500); // Delay to update the display and avoid flickering
 }
